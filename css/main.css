@@ -16,6 +16,10 @@ strong{color:#25BAD0};
     height: 300px;
 }
 
+section.aboutMe.pb-5 {
+    background-image: linear-gradient(to right,#0450e0,#0d90dd,#8f009d);
+}
+
 .tech img{
     width: 55px;
 }
