@@ -7,15 +7,7 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-Cypress.Commands.add('login', (username, password) => {
-    cy.session([username, password], () => {
-        cy.visit('https://testing.cgatewaydev.link/login');
-        cy.get('#username').clear().type(username); // Use the username variable here
-        cy.get('#password').clear().type(password); // Use the password variable here
-        cy.contains('Login').click();
-        cy.url().should('include', '/', { timeout: 5000 });
-    });
-});
+//
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
@@ -31,3 +23,10 @@ Cypress.Commands.add('login', (username, password) => {
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('login', ({username, password }) => {
+    cy.get('#username').type(username); 
+    cy.get('#password').type(password); 
+    cy.get('form').submit(); 
+    cy.url().should('include', '/'); 
+});

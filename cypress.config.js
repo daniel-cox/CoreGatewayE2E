@@ -1,11 +1,10 @@
 const { defineConfig } = require("cypress");
 
-module.exports = {
-  // ...rest of the Cypress project config
-  projectId: "x865nf",
-
+module.exports = defineConfig({
+  projectId: "dzqfem",
   e2e: {
-    baseUrl: 'https://testing.cgatewaydev.link/login'
-  }
-
-};
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+  },
+});
