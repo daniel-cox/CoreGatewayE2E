@@ -5,6 +5,7 @@ describe('Merchant Login', () => {
         cy.get('#username').type('dctesting2');
         cy.get('#password').type('Spring2024');
         cy.get('form').submit();
+        cy.wait(5000);
     });
 
     it('Should remain logged in', () => {

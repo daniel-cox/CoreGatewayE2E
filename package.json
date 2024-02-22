@@ -1,7 +1,0 @@
-{
-  "devDependencies": {
-    "cypress": "^13.6.5",
-    "baseUrl": "https://testing.cgatewaydev.link"
-
-  }
-}
