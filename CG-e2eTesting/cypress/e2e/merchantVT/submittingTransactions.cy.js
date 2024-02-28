@@ -11,13 +11,9 @@ describe("submitting a transaction", () => {
       .click()
       .type("4000000000000002");
 
-     // Click on the year dropdown
     cy.get('.v-input__slot').click();
- 
-     // Click on all the elements with the class '.v-menu' that contain the text '2026'
     cy.get('.v-menu').contains('2026').click({ multiple: true });
     cy.get('v-text-field__slot')
-     // Assert that the year has been changed to 2026
      cy.get('.v-select__selections').should('contain', '2026');
 
 
