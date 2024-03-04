@@ -17,7 +17,9 @@ describe("add a customer to the vault", () => {
   it("should add a customer to the vault", () => {
     cy.wait(3000);
 
-    cy.visit("/customers");
+    cy.visit("https://testing.cgatewaydev.link/customers");
+
+    // Initiate Customer Creation:
     cy.contains("a", "Add").click();
     cy.wait(3000);
     // Customer Billing Details Input:

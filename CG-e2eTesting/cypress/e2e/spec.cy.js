@@ -1,5 +1,5 @@
-describe("template spec", () => {
-  it("passes", () => {
-    cy.visit("testing.cgatewaydev.link");
-  });
-});
+describe('template spec', () => {
+  it('passes', () => {
+    cy.visit('https://testing.cgatewaydev.link')
+  })
+})
