@@ -5,7 +5,16 @@ module.exports = {
   e2e: {
     setupNodeEvents(on, config) {
       // implement node event listeners here
+      // Logging setup
+
+      on("task", {
+        log(message) {
+          console.log(message)
+          return null
+        },
+      })
     },
-    baseUrl: "https://testing.cgatewaydev.link"
-  }
-};
+    downloadsFolder: "cypress/downloads",
+    baseUrl: "https://testing.cgatewaydev.link",
+  },
+}
