@@ -51,7 +51,7 @@ describe("submitting a transaction", () => {
     cy.wait(5000)
     terminalOptions.forEach((processorName, index) => {
       cy.task("log", `${index} Processing transaction with ${processorName}`)
-      let vSlots = document.querySelectorAll("v-select__slot")
+      let vSlots = document.querySelectorAll("v-select__selections")
       cy.task("log", `v-slots: ${vSlots}`)
       cy.writeFile(
         `cypress/downloads/vSlots${index}.txt`,
@@ -159,7 +159,7 @@ describe("submitting a transaction", () => {
 
         searchForProcessor(0)
 
-        cy.wait(10000)
+        cy.wait(1000)
         cy.get('input[name="amount"]')
           .clear({ force: true })
           .type("5.00", { force: true })
