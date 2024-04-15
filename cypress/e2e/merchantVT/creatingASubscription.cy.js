@@ -1,13 +1,12 @@
 describe("submitting a transaction", () => {
   beforeEach(() => {
-    cy.intercept("POST", "/login").as("loginRequest")
-    cy.visit("login")
+    cy.visit("https://testing.cgatewaydev.link/login")
 
     cy.get("#username").type("dctesting2")
     cy.get("#password").type("Spring2024!")
-    cy.get('button[type="submit"]').click()
+    cy.contains("button", "Login").click()
 
-    cy.wait("@loginRequest").then(() => {})
+    cy.contains("button", "Daniel Cox").should("exist")
   })
 
   it("should allow a user to process a transaction", () => {

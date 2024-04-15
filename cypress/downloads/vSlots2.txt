@@ -1,1 +1,44 @@
-log, [object NodeList]v-slots: [object NodeList]
+[
+  {
+    "index": 0,
+    "id": "",
+    "className": "v-select__slot",
+    "innerHTML": "<label for=\"input-110\" class=\""
+  },
+  {
+    "index": 1,
+    "id": "",
+    "className": "v-select__slot",
+    "innerHTML": "<label for=\"73-country\" class="
+  },
+  {
+    "index": 2,
+    "id": "",
+    "className": "v-select__slot",
+    "innerHTML": "<label for=\"input-136\" class=\""
+  },
+  {
+    "index": 3,
+    "id": "",
+    "className": "v-select__slot",
+    "innerHTML": "<label for=\"input-142\" class=\""
+  },
+  {
+    "index": 4,
+    "id": "",
+    "className": "v-select__slot",
+    "innerHTML": "<label for=\"input-151\" class=\""
+  },
+  {
+    "index": 5,
+    "id": "",
+    "className": "v-select__slot",
+    "innerHTML": "<label for=\"input-156\" class=\""
+  },
+  {
+    "index": 6,
+    "id": "",
+    "className": "v-select__slot",
+    "innerHTML": "<label for=\"input-164\" class=\""
+  }
+]
