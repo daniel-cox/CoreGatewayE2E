@@ -1,10 +1,7 @@
 describe("add a customer to the vault", () => {
-  // General explanation: This test suite verifies the functionality of adding a new customer to the vault within your application.
-
   beforeEach(() => {
     cy.visit("https://testing.cgatewaydev.link/login")
 
-    // User Authentication:
     cy.get("#username").type("dctesting2")
     cy.get("#password").type("Spring2024!")
     cy.contains("button", "Login").click()
