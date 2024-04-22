@@ -1,9 +1,9 @@
 describe("submitting a transaction", () => {
   beforeEach(() => {
-    cy.visit("https://testing.cgatewaydev.link/login")
+    cy.visit("https://validationtest.cgatewaydev.link/login")
 
     // User Authentication:
-    cy.get("#username").type("dctesting2")
+    cy.get("#username").type("dctesting3")
     cy.get("#password").type("Spring2024!")
     cy.contains("button", "Login").click()
     cy.wait(500)
@@ -163,6 +163,23 @@ describe("submitting a transaction", () => {
         cy.get('input[name="amount"]')
           .clear({ force: true })
           .type("5.00", { force: true })
+
+        cy.wait(1000)
+        cy.get('input[name="amount"]')
+          .clear({ force: true })
+          .type("5.00", { force: true })
+
+        cy.contains(".tw-text-base", "Surcharge Fee").then(($element) => {
+          cy.get('span[class*="data-v-"]').within(() => {
+            cy.get("span")
+              .invoke("text")
+              .then((text) => {
+                const amountString = text.replace(/[^\d.]/g, "")
+                const amount = parseFloat(amountString)
+                expect(amount).to.be.greaterThan(0.0)
+              })
+          })
+        })
 
         cy.get('button[type="submit"]').click()
         cy.wait(3000)
