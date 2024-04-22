@@ -79,7 +79,7 @@ describe("submitting a transaction", () => {
         cy.wait(1000)
 
         cy.task("log", `v-slots: ${vSlots}`)
-
+        // Input biling details
         cy.get('[id$="-company"]').type("Mockup Company")
         cy.get('[id$="-firstName"]').type(randomFirstName)
         cy.get('[id$="-lastName"]').type(randomLastName)
@@ -91,6 +91,7 @@ describe("submitting a transaction", () => {
 
         const listItems = document.querySelectorAll("v-list-item__content")
 
+        //select Tennessee in state dropdown
         cy.get(".v-list-item__content").each((item) => {
           const stateName = item.text().trim()
           if (stateName === "Tennessee") {
@@ -105,6 +106,9 @@ describe("submitting a transaction", () => {
           .should("be.visible")
           .click()
 
+        //NOTE create tests to check shipping fields
+
+        //select United States in the country dropdown
         cy.get(".v-input__control").each((item) => {
           const countryName = item.text().trim()
           if (countryName === "United States") {
@@ -139,7 +143,7 @@ describe("submitting a transaction", () => {
         cy.task("log", `Selecting ${item.innerHTML} processor`)
 
         const searchForProcessor = (startIndex) => {
-          // Iterate through the vSlots array starting from the provided startIndex
+          // Iterate through the vSlots array
           for (let i = startIndex; i < vSlots.length; i++) {
             const item = vSlots[i]
             cy.task("log", `Selecting ${item.innerHTML} processor`)
@@ -158,12 +162,12 @@ describe("submitting a transaction", () => {
         }
 
         searchForProcessor(0)
-
+        //input dollar amount
         cy.wait(1000)
         cy.get('input[name="amount"]')
           .clear({ force: true })
           .type("5.00", { force: true })
-
+        //submit Order
         cy.get('button[type="submit"]').click()
         cy.wait(3000)
         cy.get(".v-btn").contains("Close").click()
