@@ -43,8 +43,8 @@ describe("submitting a transaction", () => {
     cy.contains("h3.mb-3", "Billing").should("be.visible")
 
     const terminalOptions = [
-      "Elavon",
       "First Data Nashville",
+      "Elavon",
       "First Data Omaha",
       "TSYS TESTING",
     ]
@@ -140,38 +140,73 @@ describe("submitting a transaction", () => {
 
         const item = vSlots[6]
 
-        cy.task("log", `Selecting ${item.innerHTML} processor`)
+        // cy.task("log", `Selecting ${item.innerHTML} processor`)
 
-        const searchForProcessor = (startIndex) => {
-          // Iterate through the vSlots array
-          for (let i = startIndex; i < vSlots.length; i++) {
-            const item = vSlots[i]
-            cy.task("log", `Selecting ${item.innerHTML} processor`)
+        // const searchForProcessor = () => {
+        //   // Click on the dropdown toggle to activate it
+        //   cy.get(".v-input__slot label").contains("Terminal").click()
 
-            // Search within the current vSlot element
-            cy.get(item).then(($vSlot) => {
-              const $label = $vSlot.find(`label[for="${item.id}"]`)
-              const $input = $vSlot.find(`input#${item.id}`)
+        //   // Wait for the menu to become active
+        //   cy.get(".v-select--is-menu-active").then(() => {
+        //     // Find and select the parent element based on text content
+        //     cy.get(".v-list-item__content").each(($content) => {
+        //       const contentText = $content.text().toLowerCase()
 
-              if ($input.length && $label.text() === processorName) {
-                cy.wrap($label).click()
-                return
-              }
-            })
+        //       // List of keywords to check for in the text content
+        //       const keywords = [
+        //         "Elavon",
+        //         "First Data Nashville",
+        //         "First Data Omaha",
+        //         "TSYS TESTING",
+        //       ]
+
+        //       // Check if any keyword is present in the text content
+        //       const containsKeyword = keywords.some((keyword) => {
+        //         cy.task("log", `Checking for ${keyword} in ${processorName}`)
+        //         if (keyword === processorName) {
+        //           let selectedProcessor = contentText.includes(keyword)
+        //           cy.task("log", `Selecting ${processorName} processor`)
+        //           return selectedProcessor
+        //         }
+        //       })
+
+        //       if (containsKeyword) {
+        //         cy.wrap($content).click() // Click on the parent element
+        //         return false // Stop iterating once a match is found
+        //       }
+        //     })
+        //   })
+        // }
+
+        // Call the function with the desired processor name
+        // searchForProcessor()
+
+        const iterateProcessors = (processorIndex) => {
+          if (processorIndex === terminalOptions[index]) {
+            // All processors have been processed
+            return
           }
+
+          cy.selectProcessor(processorName, () => {
+            // Continue processing with the next processor after a delay
+            cy.wait(1000)
+            cy.task("log", `Selecting ${terminalOptions[index]} processor`)
+            iterateProcessors(index)
+          })
         }
 
-        searchForProcessor(0)
-        //input dollar amount
-        cy.wait(1000)
-        cy.get('input[name="amount"]')
-          .clear({ force: true })
-          .type("5.00", { force: true })
-        //submit Order
-        cy.get('button[type="submit"]').click()
-        cy.wait(3000)
-        cy.get(".v-btn").contains("Close").click()
+        iterateProcessors(0)
       })
+
+      //input dollar amount
+      cy.wait(1000)
+      cy.get('input[name="amount"]')
+        .clear({ force: true })
+        .type("5.00", { force: true })
+      //submit Order
+      cy.get('button[type="submit"]').click()
+      cy.wait(3000)
+      cy.get(".v-btn").contains("Close").click()
     })
   })
 })
