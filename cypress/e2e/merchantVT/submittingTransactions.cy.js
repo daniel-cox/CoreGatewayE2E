@@ -140,6 +140,47 @@ describe("submitting a transaction", () => {
 
         const item = vSlots[6]
 
+        // cy.task("log", `Selecting ${item.innerHTML} processor`)
+
+        // const searchForProcessor = () => {
+        //   // Click on the dropdown toggle to activate it
+        //   cy.get(".v-input__slot label").contains("Terminal").click()
+
+        //   // Wait for the menu to become active
+        //   cy.get(".v-select--is-menu-active").then(() => {
+        //     // Find and select the parent element based on text content
+        //     cy.get(".v-list-item__content").each(($content) => {
+        //       const contentText = $content.text().toLowerCase()
+
+        //       // List of keywords to check for in the text content
+        //       const keywords = [
+        //         "Elavon",
+        //         "First Data Nashville",
+        //         "First Data Omaha",
+        //         "TSYS TESTING",
+        //       ]
+
+        //       // Check if any keyword is present in the text content
+        //       const containsKeyword = keywords.some((keyword) => {
+        //         cy.task("log", `Checking for ${keyword} in ${processorName}`)
+        //         if (keyword === processorName) {
+        //           let selectedProcessor = contentText.includes(keyword)
+        //           cy.task("log", `Selecting ${processorName} processor`)
+        //           return selectedProcessor
+        //         }
+        //       })
+
+        //       if (containsKeyword) {
+        //         cy.wrap($content).click() // Click on the parent element
+        //         return false // Stop iterating once a match is found
+        //       }
+        //     })
+        //   })
+        // }
+
+        // Call the function with the desired processor name
+        // searchForProcessor()
+
         const iterateProcessors = (processorIndex) => {
           if (processorIndex === terminalOptions[index]) {
             // All processors have been processed
