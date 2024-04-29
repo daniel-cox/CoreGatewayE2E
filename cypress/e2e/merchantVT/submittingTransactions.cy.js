@@ -94,9 +94,10 @@ describe("submitting a transaction", () => {
         //select Tennessee in state dropdown
         cy.get(".v-list-item__content").each((item) => {
           const stateName = item.text().trim()
-          if (stateName === "Tennessee") {
+          if (stateName == "Tennessee") {
             cy.wrap(item).click()
           }
+          cy.get(".v-input__control").invoke("hide")
         })
 
         cy.get('[id$="-zip"]').type("37205")
@@ -114,6 +115,7 @@ describe("submitting a transaction", () => {
           if (countryName === "United States") {
             cy.wrap(item).click()
           }
+          cy.get(".v-input__control").invoke("hide")
         })
 
         cy.get('input[name="cc-payment-method-number"]').type(
