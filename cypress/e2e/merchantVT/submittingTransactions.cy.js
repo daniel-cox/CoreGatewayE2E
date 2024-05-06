@@ -87,12 +87,10 @@ describe("submitting a transaction", () => {
         cy.get('[id$="-address2"]').type("suite 983b")
         cy.get('[id$="-city"]').type("Nashville")
 
-        cy.get('[aria-owns^="list-"]').contains("State").click({ force: true })
-
         const listItems = document.querySelectorAll("v-list-item__content")
 
         //select Tennessee in state dropdown
-        cy.get(".v-list-item__content").each((item) => {
+        cy.get('.v-input__slot input[readonly="readonly"]').each((item) => {
           const stateName = item.text().trim()
           if (stateName == "Tennessee") {
             cy.wrap(item).click()
@@ -115,7 +113,7 @@ describe("submitting a transaction", () => {
           if (countryName === "United States") {
             cy.wrap(item).click()
           }
-          cy.get(".v-input__control").invoke("hide")
+          cy.get(".v-input__control")
         })
 
         cy.get('input[name="cc-payment-method-number"]').type(
