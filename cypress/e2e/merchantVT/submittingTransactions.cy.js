@@ -97,7 +97,7 @@ describe("submitting a transaction", () => {
           if (stateName == "Tennessee") {
             cy.wrap(item).click()
           }
-          cy.get(".v-input__control").invoke("hide")
+          cy.get(".v-input__control")
         })
 
         cy.get('[id$="-zip"]').type("37205")
