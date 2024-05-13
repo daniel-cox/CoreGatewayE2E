@@ -48,7 +48,7 @@ describe("submitting a transaction", () => {
       "First Data Omaha",
       "TSYS TESTING",
     ]
-    cy.wait(5000)
+    cy.wait(2000)
     terminalOptions.forEach((processorName, index) => {
       cy.task("log", `${index} Processing transaction with ${processorName}`)
       let vSlots = document.querySelectorAll("v-select__selections")
@@ -87,18 +87,17 @@ describe("submitting a transaction", () => {
         cy.get('[id$="-address2"]').type("suite 983b")
         cy.get('[id$="-city"]').type("Nashville")
 
-        cy.get('[aria-owns^="list-"]').contains("State").click({ force: true })
-
         const listItems = document.querySelectorAll("v-list-item__content")
 
         //select Tennessee in state dropdown
-        cy.get(".v-list-item__content").each((item) => {
-          const stateName = item.text().trim()
-          if (stateName == "Tennessee") {
-            cy.wrap(item).click()
-          }
-          cy.get(".v-input__control").invoke("hide")
-        })
+        // Click on the state dropdown to open the menu
+        cy.get("div[data-v-09c73962]").contains("State").click({ force: true })
+
+        // Wait for the dropdown menu to open
+        cy.get(".v-menu__content").should("be.visible")
+
+        // Select 'Tennessee' from the dropdown menu
+        cy.contains(".v-list-item__title", "Tennessee").click()
 
         cy.get('[id$="-zip"]').type("37205")
         cy.get('[id$="-phone"]').type("123-123-1234")
@@ -115,7 +114,7 @@ describe("submitting a transaction", () => {
           if (countryName === "United States") {
             cy.wrap(item).click()
           }
-          cy.get(".v-input__control").invoke("hide")
+          cy.get(".v-input__control")
         })
 
         cy.get('input[name="cc-payment-method-number"]').type(
@@ -124,9 +123,6 @@ describe("submitting a transaction", () => {
         //select month
         cy.get(".v-select__selection").contains(4).type(6)
         cy.get(".v-list-item__title").contains(6).click({ force: true })
-        //select year
-        cy.get(".v-select__selection").contains(2024).type(2024)
-        cy.get(".v-list-item__title").contains(2026).click({ force: true })
 
         //input cvv
         cy.get(".v-text-field__slot").contains("CVV")
