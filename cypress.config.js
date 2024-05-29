@@ -16,5 +16,6 @@ module.exports = {
     },
     downloadsFolder: "cypress/downloads",
     baseUrl: "https://testing.cgatewaydev.link",
+    experimentalSessionSupport: true,
   },
 }

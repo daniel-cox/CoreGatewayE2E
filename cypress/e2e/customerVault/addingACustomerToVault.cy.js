@@ -9,12 +9,39 @@ describe("add a customer to the vault", () => {
     cy.contains("button", "Daniel Cox").should("exist")
   })
 
+  const firstNames = [
+    "John",
+    "Jane",
+    "Sally",
+    "Bob",
+    "Mark",
+    "David",
+    "Sarah",
+    "Brett",
+    "Daniel",
+  ]
+
+  const lastNames = [
+    "Doe",
+    "Smith",
+    "Johnson",
+    "Williams",
+    "Jones",
+    "Brown",
+    "Davis",
+  ]
+
   it("should add a customer to the vault", () => {
+    const randomFirstNameIndex = Math.floor(Math.random() * firstNames.length)
+    const randomLastNameIndex = Math.floor(Math.random() * lastNames.length)
+
+    const randomFirstName = firstNames[randomFirstNameIndex]
+    const randomLastName = lastNames[randomLastNameIndex]
+
     cy.wait(3000)
 
     cy.visit("https://testing.cgatewaydev.link/customers")
 
-    // Initiate Customer Creation:
     cy.contains("a", "Add").click()
 
     // Customer Billing Details Input:
@@ -22,14 +49,20 @@ describe("add a customer to the vault", () => {
     cy.get('input[name="customer-address-company"]')
       .should("be.visible")
       .type("Test Company")
-    cy.get('input[name="customer-address-first-name"]').type("John")
+    cy.get('input[name="customer-address-first-name"]').type(randomFirstName)
+    cy.get('input[name="customer-address-last-name"]').type(randomLastName)
+    cy.get('[id$="-address1"]').type("123 Ribbon Ln")
+    cy.get('[id$="-address2"]').type("suite 983b")
+    cy.get('[id$="-city"]').type("Nashville")
+
+    cy.wait(500)
 
     // State Selection
-    cy.get('div[role="button"]')
-    cy.get('[id^="input-"]').should("be.visible").click({ force: true })
-    cy.wait(1000)
-    cy.get(".v-menu__content").should("be.visible")
-    cy.contains(".v-list-item__title", "Tennessee").click()
+    cy.get("div[role='button']").click({ multiple: true })
+    cy.get("v-select__slot")
+    cy.get(".v-list-item__title")
+      .should("contain", "state")
+      .click({ force: true })
 
     //Customer card details
     cy.get('input[name="nickname"]').type("Main Card")
